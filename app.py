@@ -3,13 +3,21 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
-# Sample Data Preparation (Assume this data comes from your actual dataset)
+# Sample Data Preparation (Check array lengths)
 data = {
     'month': pd.date_range(start='2023-01-01', periods=12, freq='M').strftime('%Y-%m'),
-    'cpt_code': ['CPT001'] * 12 + ['CPT002'] * 12,
-    'count': [100, 110, 120, 130, 125, 115, 135, 145, 155, 150, 140, 130] * 2,
-    'denial_rate': [0.1, 0.12, 0.11, 0.09, 0.08, 0.15, 0.13, 0.1, 0.09, 0.07, 0.06, 0.05] * 2
+    'cpt_code': ['CPT001'] * 12 + ['CPT002'] * 12,  # 24 entries total
+    'count': [100, 110, 120, 130, 125, 115, 135, 145, 155, 150, 140, 130] * 2,  # 24 entries
+    'denial_rate': [0.1, 0.12, 0.11, 0.09, 0.08, 0.15, 0.13, 0.1, 0.09, 0.07, 0.06, 0.05] * 2  # 24 entries
 }
+
+# Ensure all columns are the same length (for debugging)
+print(f"Length of 'month': {len(data['month'])}")
+print(f"Length of 'cpt_code': {len(data['cpt_code'])}")
+print(f"Length of 'count': {len(data['count'])}")
+print(f"Length of 'denial_rate': {len(data['denial_rate'])}")
+
+# Now create the DataFrame (all arrays must have the same length)
 df = pd.DataFrame(data)
 
 # Function to calculate the allowed amount based on denial rate
